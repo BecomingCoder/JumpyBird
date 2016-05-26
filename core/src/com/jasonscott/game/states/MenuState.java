@@ -1,5 +1,6 @@
 package com.jasonscott.game.states;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.jasonscott.game.JumpyDemo;
@@ -8,6 +9,7 @@ import com.jasonscott.game.JumpyDemo;
  * Created by hus on 5/24/16.
  */
 public class MenuState extends State {
+
     private Texture background;
     private Texture playBtn;
 
@@ -20,12 +22,15 @@ public class MenuState extends State {
 
     @Override
     public void handleInput() {
-
+        if(Gdx.input.justTouched()) {
+            gsm.set(new PlayState(gsm));
+            dispose();
+        }
     }
 
     @Override
     public void update(float dt) {
-
+        handleInput();
     }
 
     @Override
@@ -36,4 +41,12 @@ public class MenuState extends State {
         sb.end();
 
     }
+
+    @Override
+    public void dispose() {
+        background.dispose();
+        playBtn.dispose();
+
+    }
+
 }
